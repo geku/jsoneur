@@ -27,10 +27,12 @@ module Jsoneur
     end
 
     def set_faraday_defaults(faraday)
-      faraday.adapter Faraday.default_adapter
       faraday.request :json
+
       faraday.response :mashify
       faraday.response :json, :content_type => /\bjson$/
+      
+      faraday.adapter Faraday.default_adapter
     end
 
     def get(params = {})
