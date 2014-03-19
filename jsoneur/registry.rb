@@ -30,24 +30,3 @@ module Jsoneur
   end
 end
 
-
-
-#
-# USAGE
-#
-# Registry.add('github_user_repos', 'https://api.github.com') do |service|
-#   # todo allow parameters in URL
-#   # todo error handling, e.g. 404 with callbacks
-#   service.path   = '/users/defunkt/repos'
-#   service.default_params = {one: 'two'}
-#   service.connection do |conn|
-#     conn.request :json
-#     #...
-#   end
-# end
-
-
-# Registry.get('github_user_repos', params = {})
-
-
-
