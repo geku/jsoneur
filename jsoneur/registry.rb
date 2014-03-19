@@ -23,9 +23,8 @@ module Jsoneur
       faraday.response :json, :content_type => /\bjson$/
     end
 
-    def get(service_name, params = {})
-      service = services[service_name]
-      service.get(params) if service
+    def [](service_name)
+      services[service_name]
     end
 
   end
