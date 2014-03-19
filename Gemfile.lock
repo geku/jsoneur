@@ -1,0 +1,24 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    awesome_print (1.2.0)
+    faraday (0.8.9)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
+    hashie (2.0.5)
+    multi_json (1.9.0)
+    multipart-post (1.2.0)
+    rash (0.4.0)
+      hashie (~> 2.0.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  faraday
+  faraday_middleware
+  hashie
+  multi_json
+  rash
