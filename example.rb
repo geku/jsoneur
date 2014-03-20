@@ -4,7 +4,10 @@ require 'bundler/setup'
 require './jsoneur/registry'
 require 'awesome_print'
 
-puts "wrong parameters" && exit if ARGV.size != 1
+if ARGV.size < 1
+  puts "wrong number of parameters"
+  exit
+end
 
 reg = Jsoneur::Registry.new
 reg.add('github_user_repos', 'https://api.github.com') do |service|

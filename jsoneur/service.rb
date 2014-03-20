@@ -3,11 +3,16 @@ require 'open-uri'
 module Jsoneur
   class Service
 
-    attr_accessor :path, :default_params
+    # Config methods
+    attr_accessor :path, :default_params, :empty_response
 
     def initialize(name, base_url, &block)
-      @name     = name
-      @base_url = base_url
+      @name         = name
+      @base_url     = base_url
+
+      # Set default config
+      @default_params = {}
+      @empty_response = []
 
       block.call(self)
 
@@ -16,10 +21,6 @@ module Jsoneur
           set_faraday_defaults(f)
         end
       end
-    end
-
-    def default_params
-      @default_params || {}
     end
 
     def connection(&block)
@@ -35,11 +36,19 @@ module Jsoneur
       faraday.adapter Faraday.default_adapter
     end
 
+    # Raises (depending on adapter that is used, by default NetHTTP)
+    # * Faraday::Error::ConnectionFailed on connection problems
+    # * Faraday::Error::TimeoutError     on timeouts
+    # e.g. Typhoeus raises Faraday::Error::ClientError as well
     def get(params = {})
       final_path = path % urlencoded_params(params)
       result = @faraday.get(final_path, default_params.merge(params))
-      # TODO how to do error handling?
-      result.body
+
+      if result && result.success? && result.body
+        result.body 
+      else
+        empty_response
+      end
     end
 
 
