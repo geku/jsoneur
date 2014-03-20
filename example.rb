@@ -9,12 +9,12 @@ if ARGV.size < 1
   exit
 end
 
-reg = Jsoneur::Registry.new
-reg.add('github_user_repos', 'https://api.github.com') do |service|
+# reg = Jsoneur::Registry.new
+Jsoneur::Registry.add('github_user_repos', 'https://api.github.com') do |service|
   service.path = '/users/%{user}/repos'
 end
 
-repos = reg['github_user_repos'].get(user: ARGV.first)
+repos = Jsoneur::Registry['github_user_repos'].get(user: ARGV.first)
 
 repos.each do |r|
   puts ""
